@@ -2,7 +2,7 @@ from pyramid.response import Response
 from pyramid.config import Configurator
 from pyramid.view import view_config
 from wsgiref.simple_server import make_server
-from pyramid_jinja2 import _get_or_build_default_environment #?#?#?
+from pyramid_jinja2 import IJinja2Environment #?#?#?
 import json
 from pyramid.renderers import render
 #from pyramid.session import UnencryptedCookieSessionFactoryConfig
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 #        authorization_policy=authz_policy
     )
     config.include('pyramid_jinja2')
-    jinja_env = _get_or_build_default_environment(config.registry) #?#?#?
+    jinja_env = config.registry.queryUtility(IJinja2Environment)
     jinja_env.filters['json_dumps'] = json_dumps
     config.add_route('home', '/')
     config.scan('.')
