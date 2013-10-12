@@ -4,7 +4,7 @@ from pyramid.view import view_config
 from wsgiref.simple_server import make_server
 from pyramid_jinja2 import IJinja2Environment #?#?#?
 import json
-from pyramid.renderers import render
+from pyramid.renderers import JSON
 #from pyramid.session import UnencryptedCookieSessionFactoryConfig
 #from pyramid.authentication import AuthTktAuthenticationPolicy
 #from pyramid.authorization import ACLAuthorizationPolicy
@@ -14,8 +14,8 @@ from pyramid.renderers import render
 def my_view(request):
     return {'user': {'testkey1':'testvalue1', 'testkey2':'testvalue2'}}
  
-def json_dumps(d, request):
-    return render('json', d, request)
+def json_dumps(d):
+    return JSON(d)
 
 if __name__ == '__main__':
 #    authn_policy = AuthTktAuthenticationPolicy(secret='s0secret')
